@@ -1,70 +1,229 @@
 <!DOCTYPE html>
-<html lang="vi" class="scroll-smooth">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trà Chanh Verity - Năng Lượng Tươi Mát Vinschool Smart City</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        sage: {
-                            50: '#f4f7f4',
-                            100: '#e3ece3',
-                            500: '#5A8F69',
-                            600: '#487554',
-                            700: '#385c41',
-                            900: '#1f3a2b',
-                        },
-                        lemon: {
-                            100: '#fef9c3',
-                            300: '#fde047',
-                            400: '#F7E07C',
-                            500: '#eab308',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
-                    }
-                }
-            }
-        }
-    </script>
+    <title>Trà Chanh Verity - Vinschool Smart City</title>
     <style>
-        .glass-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(226, 232, 240, 0.8);
+        :root {
+            --sage-50: #f4f7f4;
+            --sage-100: #e3ece3;
+            --sage-500: #5A8F69;
+            --sage-600: #487554;
+            --sage-800: #2a4833;
+            --sage-900: #1f3a2b;
+            --lemon-300: #fde047;
+            --lemon-400: #F7E07C;
+            --slate-100: #f1f5f9;
+            --slate-200: #e2e8f0;
+            --slate-600: #475569;
+            --slate-800: #1e293b;
         }
-        .hero-gradient {
-            background: linear-gradient(135deg, #1f3a2b 0%, #385c41 50%, #5A8F69 100%);
-        }
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #f1f5f9;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 4px;
-        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, -apple-system, sans-serif; }
+        body { background-color: #f8faf8; color: var(--slate-800); padding-bottom: 80px; }
+        
+        /* Navigation */
+        nav { position: sticky; top: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--slate-200); z-index: 40; }
+        .nav-container { max-width: 1100px; margin: 0 auto; padding: 12px 20px; display: flex; justify-content: space-between; items-center; }
+        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-icon { width: 42px; height: 42px; background: var(--sage-500); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+        .logo-text h1 { font-size: 20px; color: var(--sage-900); font-weight: 800; line-height: 1; }
+        .logo-text span { font-size: 10px; color: var(--sage-600); font-weight: 700; letter-spacing: 1px; }
+
+        .btn-cart { background: var(--sage-50); color: var(--sage-700); border: 1px solid var(--sage-100); padding: 8px 16px; border-radius: 20px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+        .btn-cart:hover { background: var(--sage-100); }
+        .cart-badge { background: var(--sage-600); color: white; border-radius: 10px; padding: 2px 8px; font-size: 12px; font-weight: 800; }
+
+        /* Hero Banner */
+        .hero { background: linear-gradient(135deg, var(--sage-900), var(--sage-500)); color: white; padding: 40px 20px; text-align: center; }
+        .hero-container { max-width: 800px; margin: 0 auto; }
+        .badge { display: inline-block; background: rgba(255,255,255,0.15); color: var(--lemon-400); padding: 4px 12px; border-radius: 15px; font-size: 11px; font-weight: 700; margin-bottom: 12px; }
+        .hero h2 { font-size: 28px; font-weight: 800; margin-bottom: 10px; line-height: 1.3; }
+        .hero p { font-size: 14px; opacity: 0.9; margin-bottom: 20px; line-height: 1.6; }
+        .hero-tags { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .hero-tag { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 8px; font-size: 12px; }
+
+        /* Main Container */
+        .container { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
+        .section-title { font-size: 20px; color: var(--sage-900); font-weight: 800; margin-bottom: 20px; }
+
+        /* Menu Grid */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+        .card { background: white; border: 1px solid var(--slate-200); border-radius: 16px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between; }
+        .card-img-placeholder { height: 160px; background: linear-gradient(135deg, #e3ece3, #fef9c3); border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 12px; position: relative; }
+        .card-img-icon { font-size: 48px; margin-bottom: 4px; }
+        .card-tag { position: absolute; top: 8px; left: 8px; background: var(--sage-900); color: var(--lemon-400); font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 10px; }
+        
+        .card-title { font-size: 16px; font-weight: 700; color: var(--slate-800); margin-bottom: 4px; }
+        .card-desc { font-size: 12px; color: var(--slate-600); margin-bottom: 12px; line-height: 1.4; }
+        .card-price { font-size: 18px; font-weight: 800; color: var(--sage-600); margin-bottom: 12px; }
+
+        .select-group { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 12px; font-size: 11px; }
+        .select-group select { border: 1px solid var(--slate-200); border-radius: 6px; padding: 4px; font-size: 11px; outline: none; background: #fff; width: 100%; }
+
+        .btn-add { width: 100%; background: var(--sage-500); color: white; border: none; padding: 10px; border-radius: 10px; font-weight: 700; cursor: pointer; transition: 0.2s; }
+        .btn-add:hover { background: var(--sage-600); }
+
+        /* Reason Section */
+        .reason-box { background: white; border: 1px solid var(--slate-200); border-radius: 20px; padding: 24px; margin-top: 40px; display: grid; grid-template-columns: 2fr 1fr; gap: 20px; align-items: center; }
+        @media (max-width: 768px) { .reason-box { grid-template-columns: 1fr; } }
+        .reason-list { list-style: none; margin-top: 12px; }
+        .reason-list li { font-size: 13px; margin-bottom: 8px; display: flex; gap: 8px; }
+        .reason-stat { background: var(--sage-900); color: white; padding: 20px; border-radius: 16px; text-align: center; }
+        .reason-stat h3 { font-size: 28px; color: var(--lemon-400); font-weight: 800; }
+
+        /* Cart Drawer */
+        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); display: none; justify-content: flex-end; z-index: 50; }
+        .modal-content { background: white; width: 100%; max-width: 400px; height: 100%; padding: 24px; display: flex; flex-direction: column; justify-content: space-between; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--slate-200); padding-bottom: 12px; }
+        .cart-items { flex-grow: 1; overflow-y: auto; margin: 16px 0; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; background: var(--slate-100); border-radius: 8px; margin-bottom: 8px; font-size: 13px; }
+        .cart-item-title { font-weight: 700; }
+        .cart-item-sub { font-size: 10px; color: var(--slate-600); }
+        .btn-remove { color: red; background: none; border: none; font-weight: bold; cursor: pointer; padding: 4px; }
+
+        .input-field { width: 100%; padding: 10px; border: 1px solid var(--slate-200); border-radius: 8px; margin-bottom: 8px; font-size: 13px; outline: none; }
+        .btn-checkout { width: 100%; background: var(--sage-600); color: white; border: none; padding: 12px; border-radius: 10px; font-weight: 700; cursor: pointer; }
+
+        /* QR Modal */
+        .qr-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 60; padding: 20px; }
+        .qr-card { background: white; padding: 24px; border-radius: 20px; max-width: 340px; width: 100%; text-align: center; }
+        .qr-box { background: var(--sage-50); border: 2px dashed var(--sage-500); padding: 16px; border-radius: 12px; margin: 16px 0; }
+        .qr-svg { width: 160px; height: 160px; margin: 0 auto; display: block; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-sage-500 selection:text-white">
+<body>
 
-    <!-- NAVIGATION BAR -->
-    <nav class="fixed top-0 left-0 right-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 transition-all duration-300" id="navbar">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between
+    <!-- NAVBAR -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">🍋</div>
+                <div class="logo-text">
+                    <h1>VERITY</h1>
+                    <span>VINSCHOOL SMART CITY</span>
+                </div>
+            </a>
+            <button class="btn-cart" onclick="toggleCart(true)">
+                🛒 Giỏ hàng <span class="cart-badge" id="cart-badge">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO BANNER -->
+    <section class="hero">
+        <div class="hero-container">
+            <span class="badge">DỰ ÁN KHỞI NGHIỆP HỌC ĐƯỜNG</span>
+            <h2>VERITY – TRÀ CHANH TƯƠI SẠCH</h2>
+            <p>Sự kết hợp hoàn hảo giữa cốt trà nhài đậm vị, chanh tươi và thạch giòn. Định giá chuẩn túi tiền học sinh 25.000đ – 35.000đ[cite: 2].</p>
+            <div class="hero-tags">
+                <div class="hero-tag">📍 Giao nội khu trường học</div>
+                <div class="hero-tag">💰 Giá chuẩn: 25k - 35k[cite: 2]</div>
+                <div class="hero-tag">⚡ Nhận đồ sau 5 phút</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+        <h3 class="section-title">Menu Thức Uống Đã Chọn</h3>
+        <div class="grid" id="menu-grid"></div>
+
+        <!-- REASON SECTION -->
+        <div class="reason-box">
+            <div>
+                <span style="font-size: 11px; font-weight: 800; color: var(--sage-600);">LÝ DO ĐỊNH GIÁ[cite: 1]</span>
+                <h3 style="font-size: 18px; font-weight: 800; color: var(--sage-900); margin-top: 4px;">Vì Sao Là Mức Giá 25.000đ - 35.000đ?[cite: 2]</h3>
+                <ul class="reason-list">
+                    <li>✅ <b>Vừa túi tiền học sinh:</b> Phù hợp với chi tiêu hàng ngày của Vinsers[cite: 1].</li>
+                    <li>✅ <b>Nguyên liệu sạch:</b> Đảm bảo trà tươi ủ trong ngày và chanh vắt tự nhiên[cite: 1].</li>
+                    <li>✅ <b>Hòa vốn an toàn:</b> Chỉ cần 15-20 ly/ngày là quầy duy trì vận hành tốt[cite: 1].</li>
+                </ul>
+            </div>
+            <div class="reason-stat">
+                <p style="font-size: 11px; opacity: 0.8;">Khung Giá Chuẩn</p>
+                <h3>25k - 35k[cite: 2]</h3>
+                <p style="font-size: 10px; opacity: 0.8; margin-top: 4px;">Phù hợp Học sinh & Giáo viên[cite: 1]</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CART MODAL -->
+    <div class="modal" id="cart-modal">
+        <div class="modal-content">
+            <div>
+                <div class="modal-header">
+                    <h3 style="font-weight: 800;">Giỏ Hàng Đặt Nước</h3>
+                    <button onclick="toggleCart(false)" style="border:none; background:none; font-size:20px; cursor:pointer;">&times;</button>
+                </div>
+                <div class="cart-items" id="cart-items">
+                    <p style="text-align:center; font-size:12px; color:gray; padding:20px;">Giỏ hàng trống</p>
+                </div>
+            </div>
+
+            <div>
+                <div style="display:flex; justify-content:space-between; font-weight:800; margin-bottom:12px;">
+                    <span>Tổng tiền:</span>
+                    <span id="cart-total" style="color:var(--sage-600); font-size:18px;">0đ</span>
+                </div>
+                <input type="text" id="cust-name" placeholder="Họ và tên học sinh / giáo viên" class="input-field">
+                <input type="text" id="cust-class" placeholder="Lớp / Phòng (VD: 11A2)" class="input-field">
+                <button class="btn-checkout" onclick="openQR()">Tạo Mã VietQR Thanh Toán</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- QR CODE MODAL -->
+    <div class="qr-modal" id="qr-modal">
+        <div class="qr-card">
+            <h3 style="font-size: 18px; color: var(--sage-900);">Thanh Toán VietQR 💸</h3>
+            <p style="font-size: 11px; color: var(--slate-600); margin-top: 4px;">Quét mã bên dưới bằng app Ngân hàng hoặc Viettel Money</p>
+            
+            <div class="qr-box">
+                <!-- Mã QR tự vẽ bằng SVG không phụ thuộc mạng -->
+                <svg class="qr-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100" height="100" fill="white"/>
+                    <!-- Corner 1 -->
+                    <rect x="10" y="10" width="25" height="25" fill="#1f3a2b"/>
+                    <rect x="14" y="14" width="17" height="17" fill="white"/>
+                    <rect x="18" y="18" width="9" height="9" fill="#1f3a2b"/>
+                    <!-- Corner 2 -->
+                    <rect x="65" y="10" width="25" height="25" fill="#1f3a2b"/>
+                    <rect x="69" y="14" width="17" height="17" fill="white"/>
+                    <rect x="73" y="18" width="9" height="9" fill="#1f3a2b"/>
+                    <!-- Corner 3 -->
+                    <rect x="10" y="65" width="25" height="25" fill="#1f3a2b"/>
+                    <rect x="14" y="69" width="17" height="17" fill="white"/>
+                    <rect x="18" y="73" width="9" height="9" fill="#1f3a2b"/>
+                    <!-- Decorative Patterns -->
+                    <rect x="40" y="10" width="15" height="5" fill="#5A8F69"/>
+                    <rect x="45" y="20" width="10" height="10" fill="#1f3a2b"/>
+                    <rect x="10" y="42" width="10" height="10" fill="#5A8F69"/>
+                    <rect x="25" y="45" width="20" height="5" fill="#1f3a2b"/>
+                    <rect x="50" y="40" width="15" height="15" fill="#1f3a2b"/>
+                    <rect x="70" y="45" width="20" height="10" fill="#5A8F69"/>
+                    <rect x="42" y="65" width="10" height="25" fill="#1f3a2b"/>
+                    <rect x="60" y="65" width="15" height="10" fill="#5A8F69"/>
+                    <rect x="80" y="80" width="10" height="10" fill="#1f3a2b"/>
+                </svg>
+                <p id="qr-amount-text" style="font-weight: 800; color: var(--sage-700); margin-top: 8px; font-size: 16px;">0đ</p>
+                <p id="qr-memo-text" style="font-size: 11px; color: var(--slate-600); font-family: monospace;"></p>
+            </div>
+
+            <button class="btn-checkout" onclick="closeQR()" style="background: var(--slate-800);">Hoàn Tất / Đóng</button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        const products = [
+            { id: 1, name: 'Trà Chanh Tươi Verity', price: 25000, desc: 'Cốt trà nhài ủ lạnh kết hợp chanh tươi nguyên quả vắt trực tiếp.', tag: 'Truyền Thống', icon: '🍋' },
+            { id: 2, name: 'Trà Chanh Full Thạch Dudu', price: 30000, desc: 'Vị trà chanh chua ngọt dịu nhẹ phủ full thạch giòn sần sật[cite: 1].', tag: 'Best Seller', icon: '🧋' },
+            { id: 3, name: 'Trà Trái Cây Nhiệt Đới', price: 32000, desc: 'Hỗn hợp trà chanh vắt cùng cam, xoài và dưa hấu tươi mọng nước.', tag: 'Giải Nhiệt', icon: '🍹' },
+            { id: 4, name: 'Trà Sữa Ô Long Trân Châu', price: 35000, desc: 'Đậm vị trà ô long nướng thơm lừng kèm trân châu thủ công.', tag: 'Full Topping', icon: '🧋' }
+        ];
+
+        let cart = [];
+
+        function renderMenu() {
