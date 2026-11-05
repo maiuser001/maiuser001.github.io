@@ -230,7 +230,7 @@
             const total = cart.reduce((acc, c) => acc + (c.price * c.qty), 0);
             const note = `VERITY ${classRoom} ${name}`.toUpperCase();
 
-            // Tạo mã VietQR tự động qua VietQR API
+            // Tạo mã VietQR tự động
             const qrUrl = `https://img.vietqr.io/image/MB-000000000000-compact2.png?amount=${total}&addInfo=${encodeURIComponent(note)}&accountName=VERITY%20TEA`;
 
             document.getElementById('qr-img').src = qrUrl;
